@@ -7,15 +7,25 @@ const fetchBreedDescription = function(breedName, callback) {
     if (error) {
       return callback(error, null);
     }
-    
-    callback(null, response && response.statusCode);
-    
-    const data = JSON.parse(body);
 
+    // Mentor session code
+    if (response) {
+      if (response.statusCode > 500) {
+        return callback('server issue, try again later!', null)
+      } else if (response.statusCode > 400) {
+        return callback('please check input/data', null)
+      }
+    }
+    // Mentor session code
+    
+    // callback(null, response && response.statusCode);  
+
+    const data = JSON.parse(body);
+    
     if (data.length === 0) {
-      callback('Breed not found!', null);
+      return callback('Breed not found!', null);
     } else {
-      callback(null, data[0].description);
+      return callback(null, data[0].description);
     }
   });
 
