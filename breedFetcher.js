@@ -11,14 +11,15 @@ const fetchBreedDescription = function(breedName, callback) {
     // Mentor session code
     if (response) {
       if (response.statusCode > 500) {
-        return callback('server issue, try again later!', null)
+        return callback('server issue, try again later!', null);
       } else if (response.statusCode > 400) {
-        return callback('please check input/data', null)
+        return callback('please check input/data', null);
       }
     }
     // Mentor session code
     
-    // callback(null, response && response.statusCode);  
+    // What I had before
+    // callback(null, response && response.statusCode);
 
     const data = JSON.parse(body);
     
